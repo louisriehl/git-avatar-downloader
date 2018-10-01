@@ -67,6 +67,10 @@ getRepoContributors(owner, repository, (err, result) => {
   if(err) {
     console.log("Error:", err);
   }
+  if(!fs.existsSync('./avatars/'))
+  {
+    fs.mkdirSync('./avatars');
+  }
   for(var n = 0; n < result.length; n++) {
     var myPath = 'avatars/' + result[n]['name'];
     var myAvatar = result[n]['avatar'];
