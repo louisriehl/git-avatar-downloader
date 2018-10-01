@@ -1,0 +1,23 @@
+{
+  "name": "git-avatar-downloader",
+  "version": "1.0.0",
+  "description": "The goal of this project is to create a simple command-line application that, when given a Github user and repository, will download all the avatars of the users who have contributed to the project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louisriehl/git-avatar-downloader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/louisriehl/git-avatar-downloader/issues"
+  },
+  "homepage": "https://github.com/louisriehl/git-avatar-downloader#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
