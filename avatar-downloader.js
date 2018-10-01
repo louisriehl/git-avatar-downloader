@@ -3,6 +3,15 @@ var fs = require('fs');
 var authToken = require('./secrets');
 var myToken = 'token ' + authToken.GITHUB_TOKEN;
 
+var args = process.argv.slice(2);
+var owner = args[0];
+var repository = args[1];
+
+if(!owner || !repository) {
+  throw('No arguments given, please provide the repository owner and name');
+}
+
+
 console.log('Welcome to the GitHub avatar downloader!');
 
 function getRepoContributors(repoOwner, repoName, cb) {
@@ -47,13 +56,13 @@ function downloadImageByURL(url, filePath) {
     throw err;
   })
   .on('response', response => {
-    console.log('Status code:', response.statusMessage);
-    console.log('Content type: ', response.headers['content-type']);
+    // console.log('Status code:', response.statusMessage);
+    // console.log('Content type: ', response.headers['content-type']);
   })
   .pipe(fs.createWriteStream( filePath + '.jpeg' ));
 }
 
-getRepoContributors('jquery', 'jquery', (err, result) => {
+getRepoContributors(owner, repository, (err, result) => {
   console.log("Error:", err);
   // console.log("Result:", result);
 
