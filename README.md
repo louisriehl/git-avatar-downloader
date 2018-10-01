@@ -20,3 +20,5 @@ The goal of this project is to create a simple command-line application that, wh
 * Running `curl https://api.github.com/repos/jquery/jquery/contributors` outputs an object containing all the contributors to the jquery repo in JSON
 * When adding an Authorization header to make requests to personal repositories or avoid rate limits, the key value needs to be phrased as `'Authorization': 'token <your token>'`
 * Pitfall: when getting an API through request, the response is a JSON string, and needs to be JSON.parse() before it'll print as an actual object
+* fs.createWriteStream can't make a directory itself. `use fs.existsSync(directory)` to see if a directory exists, followed by`fs.mkdirSync(directory)` to create the directory.
+ * *_WARNING_*:   \*Sync functions should be avoided when possible, as they are blocking functions that keep anything else from happening while they run. For single-purpose scripts, like ours, this isn't serious, but they're expensive operations
