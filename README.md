@@ -18,3 +18,4 @@ The goal of this project is to create a simple command-line application that, wh
  `curl -u <username>:<token> -I https://api.github.com/users/lighthouse-labs`
 
 * Running `curl https://api.github.com/repos/jquery/jquery/contributors` outputs an object containing all the contributors to the jquery repo in JSON
+* When adding an Authorization header to make requests to personal repositories or avoid rate limits, the key value needs to be phrased as `'Authorization': 'token <your token>'`
