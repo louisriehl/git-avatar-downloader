@@ -28,7 +28,7 @@ function getContributors (repoOwner, repoName, cb) {
     for (var n = 0; n < bodyObject.length; n++) {
       arrayOfStarredURLs.push(bodyObject[n]['starred_url'].replace(/({\/owner}{\/repo})/, ""));
     }
-    console.log(arrayOfStarredURLs);
+    // console.log(arrayOfStarredURLs);
     cb(arrayOfStarredURLs);
   });
 }
@@ -42,9 +42,24 @@ function getStarredRepos (repoArray) {
     }
   };
 
+  var stars = [];
+
+  //NOTE: most starred stat is tracked by stargazers_count, and name of repo by full_name
   request(options, (err, res, body) => {
-    console.log(body);
+    var allStarred = JSON.parse(body);
+    var starArray = [];
+
+    for (var n = 0; n < allStarred.length; n++)
+    {
+      var starObject = {
+        name: allStarred[n]['full_name'],
+        stars: allStarred[n]['stargazers_count']
+      };
+      starArray.push(starObject);
+    }
+    console.log(starArray);
   });
+
 }
 
 function sortMostStarred (starred) {
