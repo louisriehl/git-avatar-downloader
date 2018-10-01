@@ -13,3 +13,5 @@ The goal of this project is to create a simple command-line application that, wh
  * generating an access token through GitHub and running the following cURL command gets us access to the API
 
  `curl -u <username>:<token> -I https://api.github.com/users/lighthouse-labs`
+
+* Running `curl https://api.github.com/repos/jquery/jquery/contributors` outputs an object containing all the contributors to the jquery repo in JSON
