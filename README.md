@@ -8,6 +8,9 @@ The goal of this project is to create a simple command-line application that, wh
 * Pipe the data using fs to download all the images into the desired directory
 * Appropriately name the avatar images
 
+## Usage
+* run `node download-avatars.js <username> <repo>` from the command line
+
 ## Problems Along the Way
 * Requesting headers through a call to the GitHub API leads to a 403 Forbidden status message: our hits for the day have been reached. As such, we need to generate an access token to bypass this limit
  * generating an access token through GitHub and running the following cURL command gets us access to the API
