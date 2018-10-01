@@ -22,3 +22,4 @@ The goal of this project is to create a simple command-line application that, wh
 * Pitfall: when getting an API through request, the response is a JSON string, and needs to be JSON.parse() before it'll print as an actual object
 * fs.createWriteStream can't make a directory itself. `use fs.existsSync(directory)` to see if a directory exists, followed by`fs.mkdirSync(directory)` to create the directory.
  * *_WARNING_*:   \*Sync functions should be avoided when possible, as they are blocking functions that keep anything else from happening while they run. For single-purpose scripts, like ours, this isn't serious, but they're expensive operations
+* Don't forget to add the filetype extension to files you download, or your computer won't know how to read the files!

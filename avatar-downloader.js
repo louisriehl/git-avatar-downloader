@@ -49,8 +49,8 @@ function downloadImageByURL(url, filePath) {
   .on('response', response => {
     console.log('Status code:', response.statusMessage);
     console.log('Content type: ', response.headers['content-type']);
-  });
-  // .pipe(fs.createWriteStream( filePath ));
+  })
+  .pipe(fs.createWriteStream( filePath + '.jpeg' ));
 }
 
 getRepoContributors('jquery', 'jquery', (err, result) => {
