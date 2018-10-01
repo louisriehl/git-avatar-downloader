@@ -14,10 +14,13 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   };
 
-  console.log(options.headers['Authorization']);
-
   request(options, (err, res, body) => {
-    cb(err, body);
+    var bodyObject = JSON.parse(body);
+    var avatarURLS = [];
+    for (var n = 0; n < bodyObject.length; n++) {
+      avatarURLS.push(bodyObject[n]['avatar_url']);
+    }
+    cb (err, avatarURLS);
   });
 
 }
