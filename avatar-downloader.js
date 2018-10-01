@@ -3,6 +3,7 @@ var fs = require('fs');
 var authToken = require('./secrets');
 var myToken = 'token ' + authToken.GITHUB_TOKEN;
 
+// Take command line input
 var args = process.argv.slice(2);
 var owner = args[0];
 var repository = args[1];
@@ -26,6 +27,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   };
 
+  console.log('Getting avatars...');
   // Now we can make a request, taking our options and a function that returns the error, response, and body of our request
   request(options, (err, res, body) => {
 
@@ -41,7 +43,8 @@ function getRepoContributors(repoOwner, repoName, cb) {
       };
       avatarURLS.push(avatarObject);
     }
-    // launch callback function with our error (if we have one), and give it the array of avatar URLs
+    // invoke callback function with our error (if we have one), and give it the array of avatar URLs
+    console.log('Downloading avatars...');
     cb (err, avatarURLS);
   });
 
@@ -56,21 +59,17 @@ function downloadImageByURL(url, filePath) {
     throw err;
   })
   .on('response', response => {
-    // console.log('Status code:', response.statusMessage);
-    // console.log('Content type: ', response.headers['content-type']);
   })
   .pipe(fs.createWriteStream( filePath + '.jpeg' ));
 }
 
 getRepoContributors(owner, repository, (err, result) => {
-  console.log("Error:", err);
-  // console.log("Result:", result);
-
+  if(err) {
+    console.log("Error:", err);
+  }
   for(var n = 0; n < result.length; n++) {
     var myPath = 'avatars/' + result[n]['name'];
     var myAvatar = result[n]['avatar'];
     downloadImageByURL(myAvatar, myPath);
   }
 });
-
-// downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg");
