@@ -29,36 +29,39 @@ function getContributors (repoOwner, repoName, cb) {
       arrayOfStarredURLs.push(bodyObject[n]['starred_url'].replace(/({\/owner}{\/repo})/, ""));
     }
     // console.log(arrayOfStarredURLs);
-    cb(arrayOfStarredURLs);
+    for (var m = 0; m < arrayOfStarredURLs.length; m++) {
+      cb(arrayOfStarredURLs[m]);
+    }
   });
 }
 
 function getStarredRepos (repoArray) {
   var options = {
-    url: repoArray[0],
+    url: repoArray,
     headers: {
       'User-Agent': 'request',
       'Authorization': myToken
     }
   };
 
-  var stars = [];
-
   //NOTE: most starred stat is tracked by stargazers_count, and name of repo by full_name
-  request(options, (err, res, body) => {
-    var allStarred = JSON.parse(body);
-    var starArray = [];
+    request(options, (err, res, body) => {
+      var allStarred = JSON.parse(body);
+      var starArray = [];
 
-    for (var n = 0; n < allStarred.length; n++)
-    {
-      var starObject = {
-        name: allStarred[n]['full_name'],
-        stars: allStarred[n]['stargazers_count']
-      };
-      starArray.push(starObject);
-    }
-    console.log(starArray);
-  });
+      for (var n = 0; n < allStarred.length; n++)
+      {
+        var starObject = {
+          name: allStarred[n]['full_name'],
+          stars: allStarred[n]['stargazers_count']
+        };
+        // We want to make sure we don't recommend the current package
+        if (starObject.name !== (owner + '/' + repository) && starObject) {
+          starArray.push(starObject);
+        }
+      }
+      console.log(starArray);
+    });
 
 }
 
