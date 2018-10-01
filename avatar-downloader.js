@@ -1,7 +1,8 @@
+require('dotenv').config();
 var request = require('request');
 var fs = require('fs');
-var authToken = require('./secrets');
-var myToken = 'token ' + authToken.GITHUB_TOKEN;
+// var authToken = require('./secrets');
+var myToken = 'token ' + process.env.AUTH_TOKEN;
 
 // Take command line input
 var args = process.argv.slice(2);
